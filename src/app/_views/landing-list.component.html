@@ -1,0 +1,93 @@
+<div class="grid">
+  <div class="input">
+    <input
+      type="search"
+      [ngClass]="{
+        errors:
+          filter.errors?.required &&
+          filter.invalid &&
+          filter.dirty &&
+          filter.touched
+      }"
+      required
+      placeholder="Search"
+      #filter="ngModel"
+      [(ngModel)]="filterString"
+    />
+    <div
+      class="error"
+      *ngIf="
+        filter.errors?.required &&
+        filter.invalid &&
+        filter.dirty &&
+        filter.touched
+      "
+    >
+      <span>Metin Giriniz.</span>
+    </div>
+  </div>
+
+  <input
+    [type]="filter.valid ? 'button' : 'disabled'"
+    [disabled]="filter.invalid"
+    (click)="onClick()"
+    value="Search"
+  />
+
+  <div class="table">
+    <table>
+      <ng-container *ngIf="isClick === false">
+        <tr
+          *ngFor="
+            let item of data;
+            let data;
+            of: data
+              | search: filterStringClicked
+              | slice: currentPage * 5:currentPage * 5 + 5
+          "
+        >
+          <td>
+            {{ item[4] }} - {{ item[5] }}<br /><span
+              >{{ item[0] }} - {{ item[3].substr(6) }}</span
+            >
+          </td>
+
+          <td>E-mail:{{ item[2] }}</td>
+        </tr>
+      </ng-container>
+      <ng-container *ngIf="isClick === true">
+        <tr
+          *ngFor="
+            let item of filterData | slice: currentPage * 3:currentPage * 3 + 3
+          "
+        >
+          <td>
+            {{ item[4] }} - {{ item[5] }}<br /><span
+              >{{ item[0] }} - {{ item[3].substr(6) }}</span
+            >
+          </td>
+
+          <td>E-mail:{{ item[2] }}</td>
+        </tr>
+      </ng-container>
+      <p class="more" *ngIf="isClick">
+        <a [routerLink]="['/searchResults']"> Show more </a>
+      </p>
+    </table>
+    <div class="pagination" *ngIf="!isClick">
+      <ul>
+        <li [ngClass]="{ disabled: currentPage === 0 }">
+          <a (click)="decreaseCurrent()">Previous</a>
+        </li>
+        <ng-container *ngFor="let item of data; let i = index">
+          <li [ngClass]="{ active: i === currentPage }" *ngIf="PageIndex(i)">
+            <a (click)="currentPage = i">{{ i + 1 }}</a>
+          </li>
+        </ng-container>
+        <li [ngClass]="{ disabled: currentPage === currentEnd() }">
+          <a (click)="indecreaseCurrent()">Next</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

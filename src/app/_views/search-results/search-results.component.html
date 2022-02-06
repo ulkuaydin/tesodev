@@ -1,0 +1,67 @@
+<div class="grid">
+  <div class="input">
+    <input
+      type="search"
+      hidden
+      placeholder="Search"
+      [(ngModel)]="filterString"
+    />
+    <p>Search results for "{{ filterString }}"</p>
+  </div>
+
+</div>
+
+<div class="table">
+  <div class="table__sort" *ngIf="filteredData.length > 0">
+    <button (click)="toggleSort()">
+      <img src="assets/images/order.svg" />Order By
+    </button>
+    <div
+      class="table__sort__list"
+      [ngStyle]="{ display: isSortOpen ? 'block' : 'none' }"
+    >
+      <ul>
+        <li><a (click)="nameAscending()">Name Ascending</a></li>
+        <li><a (click)="nameDescending()">Name Descending</a></li>
+        <li><a (click)="yearAscending()">Year Ascending</a></li>
+        <li><a (click)="yearDescending()">Year Descending</a></li>
+      </ul>
+    </div>
+  </div>
+  <table>
+    <ng-container *ngIf="filteredData.length > 0">
+      <tr
+        *ngFor="
+          let item of filteredData | slice: currentPage * 5:currentPage * 5 + 5
+        "
+      >
+        <td>
+          {{ item[4] }} - {{ item[5] }}<br /><span
+            >{{ item[0] }} - {{ item[3] | date: "yyyy" }}</span
+          >
+        </td>
+
+        <td>E-mail:{{ item[2] }}</td>
+      </tr>
+    </ng-container>
+    <ng-container *ngIf="filteredData.length <= 0">
+      <p>Nothing found</p>
+    </ng-container>
+    
+  </table>
+</div>
+<div class="pagination" *ngIf="filteredData.length > 0">
+  <ul>
+    <li [ngClass]="{ disabled: currentPage === 0 }">
+      <a (click)="currentPage = currentPage - 1">Previous</a>
+    </li>
+    <ng-container *ngFor="let item of data; let i = index">
+      <li [ngClass]="{ active: i === currentPage }" *ngIf="PageIndex(i)">
+        <a (click)="currentPage = i">{{ i + 1 }}</a>
+      </li>
+    </ng-container>
+    <li [ngClass]="{ disabled: currentPage === currentEnd() }">
+      <a (click)="currentPage = currentPage + 1">Next</a>
+    </li>
+  </ul>
+</div>

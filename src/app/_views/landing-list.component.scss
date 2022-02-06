@@ -1,0 +1,117 @@
+.grid{
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    gap: 10px;
+    input[type=button]{
+        background-color: #07457a;
+        color: #ffffff;
+        font-weight: 500;
+        height:2.3rem;
+        font-family: 'Roboto','sans-serif';
+        font-size: 14px;
+        border: 0;
+        outline: 0;
+        border-radius: 0.25rem;
+        transition: all 0.3s;
+        &:hover{
+            background-color: #039BE5;
+        }
+    }
+    input[type=disabled]{
+        background-color: #07457a;
+        color: #ffffff;
+        font-weight: 500;
+        height: 2.3rem;
+        font-family: 'Roboto','sans-serif';
+        font-size: 14px;
+        border: 0;
+        outline: 0;
+        border-radius: 0.25rem;
+        transition: all 0.3s;
+        text-align: center;
+        cursor:auto;
+    }
+}
+.input{
+    input{
+        width: 100%;
+        height: 2.3rem;
+    border-radius: 0.25rem;
+    border: 1px solid;
+    text-align: center;
+    font-family: 'Roboto','sans-serif';
+    font-size: 14px;
+    font-weight: 500;
+    color: #BDBDBD;
+    &::placeholder{
+        color: #BDBDBD;
+    }
+    }
+}
+.more{
+   text-align: center;
+   width: 200%;
+    a{
+        text-decoration:none;
+        color: #000;
+        font-weight: 500;
+    }
+}
+.table{
+    margin-top: 20px;
+    padding: 20px 40px;
+    border: 1px solid #000;
+    border-radius: 0.25rem;
+}
+table{
+    
+    tr{
+        border-bottom: 1px solid #000;
+    }
+    td{
+      padding: 20px 15px 0 15px;
+      font-weight: 500;
+      color: #424242;
+      span{
+          font-weight: 500;
+          font-size: 14px;
+          color: #757575;
+      }
+    }
+}
+.pagination{
+    ul{
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        justify-content: center;
+        gap:10px;
+        li{
+         border: 1px solid #000; 
+         cursor: pointer;
+         padding: 5px;
+         font-size: 14px;
+         border-radius: 0.2rem;
+         font-weight: 500;
+         a{
+             width: 100%;
+         }  
+        }
+    }
+}
+.disabled{
+    pointer-events:none;
+    color:gray!important;
+}
+.active{
+    background-color: blue;
+    color: #ffffff;
+}
+.error{
+    color: red;
+    font-weight: 400;
+    font-size: 12px;
+}
+.errors{
+    border: 1px solid red!important;
+}
